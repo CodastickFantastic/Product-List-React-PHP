@@ -1,0 +1,31 @@
+@use "../../scss/templates";
+
+.navigation {
+  padding: 0 0.5em 0.2em;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 2px solid black;
+  a {
+    text-decoration: none;
+    color: templates.$main-text;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+  }
+
+  .btn-section {
+    margin: 0 0 0 auto;
+    button {
+      margin: 0 1em;
+      padding: 0.15em 0.4em;
+      cursor: pointer;
+      background-color: templates.$main-color;
+      box-shadow: 3px 3px 2px 0px templates.$secondary-color;
+    }
+  }
+}
