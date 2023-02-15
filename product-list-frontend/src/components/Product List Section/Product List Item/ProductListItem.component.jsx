@@ -10,7 +10,21 @@ export default function ProductListItem({
   width,
   weight,
   size,
+  addToDelete,
+  removeFromDelete,
 }) {
+  // Delete Stack Handling
+  function addToDeleteQue(event) {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      addToDelete(value);
+    } else {
+      removeFromDelete(value);
+    }
+  }
+
+  // Dynamicly change view based on product type
   function chekcProductType() {
     switch (type) {
       case "Ferniture":
@@ -29,7 +43,7 @@ export default function ProductListItem({
 
   return (
     <article className="product">
-      <input type="checkbox" />
+      <input type="checkbox" value={sku} onChange={addToDeleteQue} />
       <p>{sku}</p>
       <h2>{name}</h2>
       <p>{price} $</p>

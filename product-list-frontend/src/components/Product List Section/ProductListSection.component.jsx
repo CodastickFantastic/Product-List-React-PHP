@@ -4,6 +4,8 @@ import "./ProductListSection.scss";
 
 export default function ProductListSection() {
   const [productList, setProductLIst] = useState();
+  const [deleteStack, setDeleteStack] = useState([]);
+  console.log(deleteStack);
 
   useEffect(() => {
     fetchData().then((products) => {
@@ -21,6 +23,8 @@ export default function ProductListSection() {
               width={product.width}
               weight={product.weight}
               size={product.size}
+              addToDelete={addToDeleteStack}
+              removeFromDelete={removeFromDeleteStack}
             />
           );
         })
@@ -42,6 +46,27 @@ export default function ProductListSection() {
     }
 
     return products;
+  }
+
+  //Handle Add To Delete
+  function addToDeleteStack(product) {
+    setDeleteStack((prevState) => {
+      return [...prevState, product];
+    });
+  }
+
+  // Handle Remofe From Delete
+  function removeFromDeleteStack(product) {
+    setDeleteStack((prevState) => {
+      let newState = [];
+      prevState.forEach((id) => {
+        if (id !== product) {
+          newState.push(id);
+        }
+      });
+
+      return newState;
+    });
   }
 
   return <section className="product-list-section">{productList}</section>;
