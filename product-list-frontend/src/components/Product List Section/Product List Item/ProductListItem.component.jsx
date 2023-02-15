@@ -1,13 +1,39 @@
-import "./ProductListItem.scss"
+import "./ProductListItem.scss";
 
-export default function ProductListItem({sku, name, price,properties}){
-    return(
-        <article className="product">
-            <input type="checkbox" />
-            <p>{sku}</p>
-            <h2>{name}</h2>
-            <p>{price} $</p>
-            <p>Size: {properties}</p>
-        </article>
-    )
+export default function ProductListItem({
+  sku,
+  name,
+  price,
+  type,
+  height,
+  length,
+  width,
+  weight,
+  size,
+}) {
+  function chekcProductType() {
+    switch (type) {
+      case "Ferniture":
+        return (
+          <p>
+            Dimension: {height}x{width}x{length}
+          </p>
+        );
+      case "Book":
+        return <p>Weight: {weight}KG</p>;
+
+      default:
+        return <p>Size: {size} MB</p>;
+    }
+  }
+
+  return (
+    <article className="product">
+      <input type="checkbox" />
+      <p>{sku}</p>
+      <h2>{name}</h2>
+      <p>{price} $</p>
+      {chekcProductType()}
+    </article>
+  );
 }
