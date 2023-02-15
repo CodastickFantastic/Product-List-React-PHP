@@ -1,4 +1,4 @@
-# Product-List--React---PHP
+# Product List (React Frontend & PHP Backend)
 ## Skandiweb Test Assignment
 
 ### Technologies: 
