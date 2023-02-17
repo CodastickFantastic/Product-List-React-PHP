@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import MassDeleteContext from "../../../contexts/MassDelete.context";
+
 import "./ProductListItem.scss";
 
 export default function ProductListItem({
@@ -13,14 +16,17 @@ export default function ProductListItem({
   addToDelete,
   removeFromDelete,
 }) {
-  // Delete Stack Handling
-  function addToDeleteQue(event) {
+  const { addToMassDelete, removeFromMassDelete } =
+    useContext(MassDeleteContext);
+
+  // Handling Checkbox Behaviour <-- Mass Delete
+  function handleToDeleteCheck(event) {
     const { value, checked } = event.target;
 
     if (checked) {
-      addToDelete(value);
+      addToMassDelete(value);
     } else {
-      removeFromDelete(value);
+      removeFromMassDelete(value);
     }
   }
 
@@ -43,7 +49,12 @@ export default function ProductListItem({
 
   return (
     <article className="product">
-      <input type="checkbox" value={sku} onChange={addToDeleteQue} />
+      <input
+        type="checkbox"
+        value={sku}
+        onChange={handleToDeleteCheck}
+        className="delete-checkbox"
+      />
       <p>{sku}</p>
       <h2>{name}</h2>
       <p>{price} $</p>

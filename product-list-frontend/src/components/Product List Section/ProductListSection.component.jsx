@@ -3,9 +3,8 @@ import ProductListItem from "./Product List Item/ProductListItem.component";
 import "./ProductListSection.scss";
 
 export default function ProductListSection() {
+  //Uploading data to display in product list section
   const [productList, setProductLIst] = useState();
-  const [deleteStack, setDeleteStack] = useState([]);
-  console.log(deleteStack);
 
   useEffect(() => {
     fetchData().then((products) => {
@@ -23,8 +22,6 @@ export default function ProductListSection() {
               width={product.width}
               weight={product.weight}
               size={product.size}
-              addToDelete={addToDeleteStack}
-              removeFromDelete={removeFromDeleteStack}
             />
           );
         })
@@ -36,7 +33,7 @@ export default function ProductListSection() {
   async function fetchData() {
     let products;
     const response = await fetch(
-      "http://127.0.0.1/Product%20List%20(React%20+%20PHP)/product-list-backend/includes/get-product-list.php"
+      "http://jakubwojtysiak.online:8080/includes/get-product-list.php"
     );
 
     if (response.status === 200) {
@@ -46,27 +43,6 @@ export default function ProductListSection() {
     }
 
     return products;
-  }
-
-  //Handle Add To Delete
-  function addToDeleteStack(product) {
-    setDeleteStack((prevState) => {
-      return [...prevState, product];
-    });
-  }
-
-  // Handle Remofe From Delete
-  function removeFromDeleteStack(product) {
-    setDeleteStack((prevState) => {
-      let newState = [];
-      prevState.forEach((id) => {
-        if (id !== product) {
-          newState.push(id);
-        }
-      });
-
-      return newState;
-    });
   }
 
   return <section className="product-list-section">{productList}</section>;

@@ -5,4 +5,10 @@ include "../classes/Products.class.php";
 include "../classes/ProductsController.class.php";
 
 $controller = new ProductsController;
-$controller->showProducts();
+
+$body = file_get_contents("php://input");
+
+$controller->deleteProducts($body);
+
+
+// echo $body;

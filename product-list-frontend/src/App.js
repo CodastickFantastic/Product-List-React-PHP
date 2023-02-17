@@ -4,17 +4,21 @@ import Navigation from "./components/Navigation/Navigation.component";
 import Home from "./pages/Home.page";
 import Footer from "./components/Footer/Footer.component";
 import AddProduct from "./pages/AddProduct.page";
+import { MassDeleteContextProvider } from "./contexts/MassDelete.context";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/add-product" element={<AddProduct />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <MassDeleteContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            <Route path="/add-product" element={<AddProduct />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </MassDeleteContextProvider>
     </div>
   );
 }
