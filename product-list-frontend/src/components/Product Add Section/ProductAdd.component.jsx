@@ -1,7 +1,18 @@
 import { useState } from "react";
 import "./ProductAdd.scss";
 
-export default function ProductAdd({ submitForm, skuError }) {
+export default function ProductAdd({
+  submitForm,
+  lengthError,
+  widthError,
+  heightError,
+  weightError,
+  sizeError,
+  skuError,
+  nameError,
+  priceError,
+  typeError,
+}) {
   //Form State Status
   const [formData, setFormData] = useState({
     sku: "",
@@ -45,6 +56,7 @@ export default function ProductAdd({ submitForm, skuError }) {
                 required
               />
             </label>
+            <p className="error">{weightError}</p>
             <p>Please provide size in MB format.</p>
           </div>
         );
@@ -63,6 +75,7 @@ export default function ProductAdd({ submitForm, skuError }) {
                 required
               />
             </label>
+            <p className="error">{heightError}</p>
             <label htmlFor="width">
               Width (CM)
               <input
@@ -75,6 +88,7 @@ export default function ProductAdd({ submitForm, skuError }) {
                 required
               />
             </label>
+            <p className="error">{widthError}</p>
             <label htmlFor="length">
               Length (CM)
               <input
@@ -87,6 +101,7 @@ export default function ProductAdd({ submitForm, skuError }) {
                 required
               />
             </label>
+            <p className="error">{lengthError}</p>
             <p>Please provide dimensions in HxWxL format.</p>
           </div>
         );
@@ -105,6 +120,7 @@ export default function ProductAdd({ submitForm, skuError }) {
                 required
               />
             </label>
+            <p className="error">{sizeError}</p>
             <p>Please provide size in MB format.</p>
           </div>
         );
@@ -137,6 +153,7 @@ export default function ProductAdd({ submitForm, skuError }) {
             required
           />
         </label>
+        <p className="error">{nameError}</p>
         <label htmlFor="price">
           Price ($)
           <input
@@ -149,6 +166,7 @@ export default function ProductAdd({ submitForm, skuError }) {
             required
           />
         </label>
+        <p className="error">{priceError}</p>
         <label htmlFor="productType">
           Type Switcher
           <select
@@ -163,6 +181,7 @@ export default function ProductAdd({ submitForm, skuError }) {
             <option value="Furniture">Furniture</option>
           </select>
         </label>
+        <p className="error">{typeError}</p>
         {renderSwitcher()}
       </form>
     </section>

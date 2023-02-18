@@ -19,7 +19,20 @@ export default function AddProduct() {
     if (response.data === "") {
       window.location = "/";
     } else {
-      setPhpResponse(response.data);
+      let errorArr = response.data.split(";");
+      let errorObj = {};
+
+      errorArr.forEach((error) => {
+        error = error
+          .replace('{"', "")
+          .replace('"}', "")
+          .replace('"', "")
+          .replace('"', "");
+        error = error.split(":");
+        errorObj[error[0]] = error[1];
+      });
+      console.log(errorObj);
+      setPhpResponse(errorObj);
     }
   }
 
@@ -35,7 +48,18 @@ export default function AddProduct() {
         secondBtnType="button"
       />
       <main>
-        <ProductAdd submitForm={submitForm} skuError={phpResponse.skuError} />
+        <ProductAdd
+          submitForm={submitForm}
+          skuError={phpResponse.skuError}
+          nameError={phpResponse.nameError}
+          priceError={phpResponse.priceError}
+          typeError={phpResponse.typeError}
+          sizeError={phpResponse.sizeError}
+          weightError={phpResponse.weightError}
+          heightError={phpResponse.heightError}
+          widthError={phpResponse.widthError}
+          lengthError={phpResponse.lengthError}
+        />
       </main>
     </>
   );

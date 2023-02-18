@@ -54,7 +54,7 @@ abstract class Products extends DataBaseHost
         if (!$stmt->rowCount()) {
             $result = true;
         } else {
-            echo json_encode(array("skuError" => "SKU already exist"));
+            echo json_encode(array("skuError" => "SKU already exist")) . ";";
             $result = false;
         }
         return $result;

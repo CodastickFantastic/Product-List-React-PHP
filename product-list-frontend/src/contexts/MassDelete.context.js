@@ -40,7 +40,7 @@ export function MassDeleteContextProvider({ children }) {
       },
     });
 
-    console.log(response);
+    // console.log(response);
   }
 
   return (
