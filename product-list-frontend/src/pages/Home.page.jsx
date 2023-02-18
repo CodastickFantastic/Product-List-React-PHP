@@ -8,7 +8,7 @@ export default function Home() {
 
   function handleProductDelete() {
     sendDeleteRequest();
-    // window.location.reload();
+    window.location.reload();
   }
 
   return (

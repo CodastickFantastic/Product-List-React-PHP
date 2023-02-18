@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./Navigation.scss";
 
@@ -20,22 +20,6 @@ export default function Navigation({
       <h1>{title}</h1>
 
       <div className="btn-section">
-        {/* <Link to={firstBtnLink}>
-          <button onClick={firstBtnFunc} form={form} type={firstBtnType}>
-            {firstBtnTitle}
-          </button>
-        </Link>
-
-        <Link to={secondBtnLink}>
-          <button
-            id={title === "Product List" ? "delete-product-btn" : ""}
-            onClick={secondBtnFunc}
-            type={secondBtnType}
-          >
-            {secondBtnTitle}
-          </button>
-        </Link> */}
-
         {firstBtnFunc || firstBtnForm ? (
           <button
             onClick={firstBtnFunc}

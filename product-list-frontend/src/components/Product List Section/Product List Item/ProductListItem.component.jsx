@@ -13,8 +13,6 @@ export default function ProductListItem({
   width,
   weight,
   size,
-  addToDelete,
-  removeFromDelete,
 }) {
   const { addToMassDelete, removeFromMassDelete } =
     useContext(MassDeleteContext);

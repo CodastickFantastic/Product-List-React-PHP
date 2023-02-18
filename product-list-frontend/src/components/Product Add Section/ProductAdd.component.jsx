@@ -1,18 +1,18 @@
 import { useState } from "react";
 import "./ProductAdd.scss";
 
-export default function ProductAdd() {
+export default function ProductAdd({ submitForm, skuError }) {
   //Form State Status
   const [formData, setFormData] = useState({
     sku: "",
     name: "",
     price: "",
-    productType: "DVD",
-    productSize: "",
-    productHeight: "",
-    productWidth: "",
-    productLength: "",
-    productWeight: "",
+    type: "DVD",
+    size: "",
+    height: "",
+    width: "",
+    length: "",
+    weight: "",
   });
 
   //Handle Form Change for React
@@ -24,12 +24,12 @@ export default function ProductAdd() {
         [name]: value,
       };
     });
-    console.log(formData);
+    // console.log(formData);
   }
 
   //Render Switcher Function
   function renderSwitcher() {
-    switch (formData.productType) {
+    switch (formData.type) {
       case "Book":
         return (
           <div className="switcher" id="Book">
@@ -39,14 +39,13 @@ export default function ProductAdd() {
                 id="weight"
                 type="number"
                 step="0.01"
-                name="productWeight"
+                name="weight"
                 onChange={handleFormChange}
-                value={formData.productWeight}
+                value={formData.weight}
                 required
               />
             </label>
             <p>Please provide size in MB format.</p>
-            <p>Example: 1024</p>
           </div>
         );
       case "Furniture":
@@ -58,9 +57,9 @@ export default function ProductAdd() {
                 id="height"
                 type="number"
                 step="0.01"
-                name="productHeight"
+                name="height"
                 onChange={handleFormChange}
-                value={formData.productHeight}
+                value={formData.height}
                 required
               />
             </label>
@@ -70,9 +69,9 @@ export default function ProductAdd() {
                 id="width"
                 type="number"
                 step="0.01"
-                name="productWidth"
+                name="width"
                 onChange={handleFormChange}
-                value={formData.productWidth}
+                value={formData.width}
                 required
               />
             </label>
@@ -82,14 +81,13 @@ export default function ProductAdd() {
                 id="length"
                 type="number"
                 step="0.01"
-                name="productLength"
+                name="length"
                 onChange={handleFormChange}
-                value={formData.productLength}
+                value={formData.length}
                 required
               />
             </label>
             <p>Please provide dimensions in HxWxL format.</p>
-            <p>Example: 1024</p>
           </div>
         );
       default:
@@ -101,14 +99,13 @@ export default function ProductAdd() {
                 id="size"
                 type="number"
                 step="0.01"
-                name="productSize"
+                name="size"
                 onChange={handleFormChange}
-                value={formData.productSize}
+                value={formData.size}
                 required
               />
             </label>
             <p>Please provide size in MB format.</p>
-            <p>Example: 1.2</p>
           </div>
         );
     }
@@ -116,7 +113,7 @@ export default function ProductAdd() {
 
   return (
     <section className="product-add">
-      <form id="product_form" action="xd.php" method="post">
+      <form id="product_form" onSubmit={submitForm}>
         <label htmlFor="sku">
           SKU
           <input
@@ -128,6 +125,7 @@ export default function ProductAdd() {
             required
           />
         </label>
+        <p className="error">{skuError}</p>
         <label htmlFor="name">
           Name
           <input
@@ -156,8 +154,8 @@ export default function ProductAdd() {
           <select
             id="productType"
             onChange={handleFormChange}
-            name="productType"
-            value={formData.productType}
+            name="type"
+            value={formData.type}
             required
           >
             <option value="DVD">DVD</option>
@@ -166,7 +164,6 @@ export default function ProductAdd() {
           </select>
         </label>
         {renderSwitcher()}
-        <button onClick={event => event.preventDefault()}>Sub</button>
       </form>
     </section>
   );

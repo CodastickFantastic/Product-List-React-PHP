@@ -1,12 +1,26 @@
 import Navigation from "../components/Navigation/Navigation.component";
 import ProductAdd from "../components/Product Add Section/ProductAdd.component";
+import axios from "axios";
+import { useState } from "react";
 
 export default function AddProduct() {
-  function submitForm(event) {
-    // event.preventDefault();
-    console.log("Save")
-    // let form = document.getElementById("product_form");
-    // form.submit();
+  //Error Handling State
+  const [phpResponse, setPhpResponse] = useState({});
+
+  async function submitForm(event) {
+    event.preventDefault();
+    let formData = new FormData(document.getElementById("product_form"));
+
+    let url =
+      "http://localhost/Product%20List%20(React%20+%20PHP)/product-list-backend/includes/add-product.php";
+
+    let response = await axios.post(url, formData);
+
+    if (response.data === "") {
+      window.location = "/";
+    } else {
+      setPhpResponse(response.data);
+    }
   }
 
   return (
@@ -14,7 +28,6 @@ export default function AddProduct() {
       <Navigation
         title="Product Add"
         firstBtnTitle="Save"
-        firstBtnFunc={submitForm}
         secondBtnTitle="Cancel"
         secondBtnLink="/"
         firstBtnForm="product_form"
@@ -22,7 +35,7 @@ export default function AddProduct() {
         secondBtnType="button"
       />
       <main>
-        <ProductAdd />
+        <ProductAdd submitForm={submitForm} skuError={phpResponse.skuError} />
       </main>
     </>
   );

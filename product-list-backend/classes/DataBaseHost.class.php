@@ -6,7 +6,7 @@ abstract class DataBaseHost
     {
         try {
             $userName = "product-provider";
-            $password = "Products123456";
+            $password = "Products123456!@#";
             $dbh = new PDO("mysql:host=localhost;dbname=scandiweb_test", $userName, $password);
             $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             return $dbh;

@@ -29,36 +29,18 @@ export function MassDeleteContextProvider({ children }) {
 
   // Send delete request to PHP
   async function sendDeleteRequest() {
-    // let response = await fetch(
-    //   "http://localhost/Product%20List%20(React%20+%20PHP)/product-list-backend/includes/delete-product.php",
-    //   {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    //     body: massDelete,
-    //   }
-    // );
-
-    // response = await response.text();
     let url =
       "http://localhost/Product%20List%20(React%20+%20PHP)/product-list-backend/includes/delete-product.php";
 
-    let responsee = await axios({
+    let response = await axios({
       method: "post",
       url: url,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
       data: {
         skuToDeleteList: massDelete,
       },
-      dataType: "json", 
-      contentType: "application/json"
     });
-    let responsee2 = await responsee.json();
 
-    console.log(responsee2);
-    // console.log(response);
+    console.log(response);
   }
 
   return (

@@ -2,6 +2,7 @@
 
 abstract class Products extends DataBaseHost
 {
+    // Query for products database
     protected function getProducts()
     {
         $sql = "SELECT * FROM products";
@@ -11,31 +12,51 @@ abstract class Products extends DataBaseHost
         return json_encode($result);
     }
 
+    // Query for delete products
     protected function deleteProductsQuery($productsArr)
     {
-        $x = $this->massDeleteBodyToArr($productsArr);
-        print_r($x); 
+        $skuToDelete = json_decode($productsArr);
+        $arrLength = count($skuToDelete->skuToDeleteList);
+        $qMarks = "";
 
+        if ($arrLength > 0) {
+            for ($x = 0; $x < $arrLength; $x++) {
+                if ($x == 0) {
+                    $qMarks .= "?";
+                } else {
+                    $qMarks .= ",?";
+                }
+            }
 
-        $sql = "DELETE from products WHERE sku in (?)";
-        $stmt = $this->connect()->prepare($sql);
-        // $stmt->execute($this->massDeleteBodyToArr($productsArr));
+            $sql = "DELETE from products WHERE sku in (" . $qMarks . ")";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute($skuToDelete->skuToDeleteList);
+        }
     }
 
-    private function massDeleteBodyToArr($body)
+    // Query for add new product
+    protected function setProduct($sku, $name, $price, $type, $weight, $size, $height, $width, $length, $id = null)
     {
-        $string = preg_replace('/[^A-Za-z0-9\,]/', '', $body);
-        $string = explode(",", $string);
-        return $string;
-        // echo "TYPE: " . gettype($string);
-        // var_dump($string);
+        $sql = "INSERT INTO `products` (`sku`, `name`, `price`, `type`, `weight`, `size`, `height`, `width`, `length`, `id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$sku, $name, $price, $type, $weight, $size, $height, $width, $length, $id]);
     }
 
-    protected function testConnection(){
-        echo "<h2>TEST CONNECTION</h2>";
-        $stmt = $this->connect()->query("SELECT * FROM products");
-        $result = $stmt->fetchAll();
+    //Check if product with such SKU already exsists
+    protected function checkSku($sku)
+    {
+        $sql = "SELECT sku FROM `products` WHERE sku = ?;";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$sku]);
 
-        print_r($result);
+        $result = false;
+
+        if (!$stmt->rowCount()) {
+            $result = true;
+        } else {
+            echo json_encode(array("skuError" => "SKU already exist"));
+            $result = false;
+        }
+        return $result;
     }
 }
