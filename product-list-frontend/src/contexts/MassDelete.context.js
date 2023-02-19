@@ -6,14 +6,14 @@ const MassDeleteContext = createContext();
 export function MassDeleteContextProvider({ children }) {
   const [massDelete, setMassDelete] = useState([]);
 
-  // Handle add product to Mass Delete
+  // Handle add product to Mass Delete list
   function addToMassDelete(product) {
     setMassDelete((prevState) => {
       return [...prevState, product];
     });
   }
 
-  // Handle remove product from Mass Delete
+  // Handle remove product from Mass Delete list
   function removeFromMassDelete(product) {
     setMassDelete((prevState) => {
       let newState = [];
@@ -29,8 +29,7 @@ export function MassDeleteContextProvider({ children }) {
 
   // Send delete request to PHP
   async function sendDeleteRequest() {
-    let url =
-      "http://localhost/Product%20List%20(React%20+%20PHP)/product-list-backend/includes/delete-product.php";
+    let url = "http://jakubwojtysiak.online:8080/includes/delete-product.php";
 
     let response = await axios({
       method: "post",

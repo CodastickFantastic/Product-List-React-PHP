@@ -1,9 +1,7 @@
 <?php
 
-abstract class DataBaseHost
-{
-    protected function connect()
-    {
+abstract class DataBaseHost{
+    protected function connect(){
         try {
             $userName = "product-provider";
             $password = "Products123456!@#";

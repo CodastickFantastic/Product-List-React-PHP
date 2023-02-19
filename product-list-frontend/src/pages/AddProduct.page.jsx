@@ -7,18 +7,20 @@ export default function AddProduct() {
   //Error Handling State
   const [phpResponse, setPhpResponse] = useState({});
 
+
+  // Add Product Handling
   async function submitForm(event) {
     event.preventDefault();
+
+    let url = "http://jakuwojtysiak.online:8080/includes/add-product.php";
     let formData = new FormData(document.getElementById("product_form"));
-
-    let url =
-      "http://localhost/Product%20List%20(React%20+%20PHP)/product-list-backend/includes/add-product.php";
-
     let response = await axios.post(url, formData);
 
+    //If response is empty, redirect to home page
     if (response.data === "") {
       window.location = "/";
     } else {
+      //If response is not empty, split the response into an array and create an object with the errors
       let errorArr = response.data.split(";");
       let errorObj = {};
 
@@ -31,7 +33,7 @@ export default function AddProduct() {
         error = error.split(":");
         errorObj[error[0]] = error[1];
       });
-      console.log(errorObj);
+      // console.log(errorObj);
       setPhpResponse(errorObj);
     }
   }

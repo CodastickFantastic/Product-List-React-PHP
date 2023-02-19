@@ -13,7 +13,7 @@ export default function ProductAdd({
   priceError,
   typeError,
 }) {
-  //Form State Status
+  //Form state status for React
   const [formData, setFormData] = useState({
     sku: "",
     name: "",
@@ -26,7 +26,7 @@ export default function ProductAdd({
     weight: "",
   });
 
-  //Handle Form Change for React
+  //Handle form change for React
   function handleFormChange(event) {
     const { name, value } = event.target;
     setFormData((prevForm) => {
@@ -38,7 +38,7 @@ export default function ProductAdd({
     // console.log(formData);
   }
 
-  //Render Switcher Function
+  //Render switcher function based on product type
   function renderSwitcher() {
     switch (formData.type) {
       case "Book":

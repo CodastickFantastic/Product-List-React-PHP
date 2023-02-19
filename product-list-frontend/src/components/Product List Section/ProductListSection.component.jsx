@@ -32,9 +32,7 @@ export default function ProductListSection() {
   // Fetch data with all saved products from PHP server
   async function fetchData() {
     let products;
-    const response = await fetch(
-      "http://localhost/Product%20List%20(React%20+%20PHP)/product-list-backend/includes/get-product-list.php"
-    );
+    const response = await fetch("http://jakubwojtysiak.online:8080/includes/get-product-list.php");
 
     if (response.status === 200) {
       products = await response.json();

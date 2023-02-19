@@ -1,12 +1,7 @@
 <?php
-
-include "../classes/DataBaseHost.class.php";
-include "../classes/Products.class.php";
-include "../classes/ProductsController.class.php";
-
 ini_set("display_errors", "0");
 
-$controller = new ProductsController;
+include "autoloader.php";
 
 $sku = $_POST['sku'];
 $name = $_POST['name'];
@@ -18,4 +13,5 @@ $height = $_POST['height'] ? $_POST['height'] : null;
 $width = $_POST['width'] ? $_POST['width'] : null;
 $length = $_POST['length'] ? $_POST['length'] : null;
 
+$controller = new ProductsController;
 $controller->addProduct($sku, $name, $price, $type, $weight, $size, $height, $width, $length);

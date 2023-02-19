@@ -1,10 +1,8 @@
 <?php
 
-abstract class Products extends DataBaseHost
-{
+abstract class Products extends DataBaseHost{
     // Query for products database
-    protected function getProducts()
-    {
+    protected function getProducts(){
         $sql = "SELECT * FROM products";
         $stmt = $this->connect()->query($sql);
         $result = $stmt->fetchAll();
@@ -13,8 +11,7 @@ abstract class Products extends DataBaseHost
     }
 
     // Query for delete products
-    protected function deleteProductsQuery($productsArr)
-    {
+    protected function deleteProductsQuery($productsArr){
         $skuToDelete = json_decode($productsArr);
         $arrLength = count($skuToDelete->skuToDeleteList);
         $qMarks = "";
@@ -35,16 +32,14 @@ abstract class Products extends DataBaseHost
     }
 
     // Query for add new product
-    protected function setProduct($sku, $name, $price, $type, $weight, $size, $height, $width, $length, $id = null)
-    {
+    protected function setProduct($sku, $name, $price, $type, $weight, $size, $height, $width, $length, $id = null){
         $sql = "INSERT INTO `products` (`sku`, `name`, `price`, `type`, `weight`, `size`, `height`, `width`, `length`, `id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$sku, $name, $price, $type, $weight, $size, $height, $width, $length, $id]);
     }
 
     //Check if product with such SKU already exsists
-    protected function checkSku($sku)
-    {
+    protected function checkSku($sku){
         $sql = "SELECT sku FROM `products` WHERE sku = ?;";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$sku]);
