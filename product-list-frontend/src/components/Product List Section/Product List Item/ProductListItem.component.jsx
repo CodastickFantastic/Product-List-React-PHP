@@ -31,7 +31,7 @@ export default function ProductListItem({
   // Dynamicly change view based on product type
   function chekcProductType() {
     switch (type) {
-      case "Ferniture":
+      case "Furniture":
         return (
           <p>
             Dimension: {height}x{width}x{length}
