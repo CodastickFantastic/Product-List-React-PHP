@@ -12,7 +12,7 @@ export default function AddProduct() {
   async function submitForm(event) {
     event.preventDefault();
 
-    let url = "http://jakuwojtysiak.online:8080/includes/add-product.php";
+    let url = "http://jakubwojtysiak.online:8080/includes/add-product.php";
     let formData = new FormData(document.getElementById("product_form"));
     let response = await axios.post(url, formData);
 
