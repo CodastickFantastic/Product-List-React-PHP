@@ -38,8 +38,7 @@ export function MassDeleteContextProvider({ children }) {
         skuToDeleteList: massDelete,
       },
     });
-
-    // console.log(response);
+    console.log(response);
   }
 
   return (

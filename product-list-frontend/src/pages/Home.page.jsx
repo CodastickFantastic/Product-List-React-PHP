@@ -6,8 +6,8 @@ import MassDeleteContext from "../contexts/MassDelete.context";
 export default function Home() {
   const { sendDeleteRequest } = useContext(MassDeleteContext);
 
-  function handleProductDelete() {
-    sendDeleteRequest();
+  async function handleProductDelete() {
+    await sendDeleteRequest();
     window.location.reload();
   }
 
